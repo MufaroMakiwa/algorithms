@@ -1,0 +1,47 @@
+import random
+
+
+def merge_sort(arr, start=None, end=None):
+    """
+    :param end:
+    :param start:
+    :param arr: Unsorted array
+    :return: sorted array
+    """
+
+    if start is None:
+        start = 0
+
+    if end is None:
+        end = len(arr)
+
+    if end - start == 1:
+        return [arr[start]]
+
+    mid = (start + end) // 2
+
+    sorted_left = merge_sort(arr, start, mid)
+    sorted_right = merge_sort(arr, mid, end)
+
+    sorted_merged = []
+
+    index_l = 0
+    index_r = 0
+
+    while index_l < len(sorted_left) and index_r < len(sorted_right):
+
+        if sorted_left[index_l] < sorted_right[index_r]:
+            sorted_merged.append(sorted_left[index_l])
+            index_l += 1
+
+        else:
+            sorted_merged.append(sorted_right[index_r])
+            index_r += 1
+
+    return sorted_merged + sorted_left[index_l:] + sorted_right[index_r:]
+
+
+if __name__ == '__main__':
+    for _ in range(10):
+        arr = [random.randint(10, 99) for _ in range(10)]
+        print(merge_sort(arr))
