@@ -90,6 +90,52 @@ def return_kth_to_last(linked_list: LinkedList, k):
         return kth_value.value
 
 
+def return_kth(linked_list, k):
+
+    p1 = 1
+    p2 = 1
+    p1_node = p2_node = linked_list.head
+
+    while True:
+
+        if p2 - p1 + 1 != k:
+            if p2_node.next is None:
+                return None
+
+            p2 += 1
+            p2_node = p2_node.next
+            continue
+
+        if p2_node.next is None:
+            return p1_node.value
+
+        p1 += 1
+        p2 += 1
+
+        p1_node = p1_node.next
+        p2_node = p2_node.next
+
+
+def reverse_linked_list(linked_list: LinkedList):
+    """"
+    :param linked_list: A linked list
+    :return: A new linked list object but reversed
+    """
+
+    head = None
+    node = linked_list.head
+
+    while node is not None:
+        new_node = Node(node.value)
+        new_node.next = head
+        head = new_node
+        node = node.next
+
+    reversed_list = LinkedList()
+    reversed_list.head = head
+    return reversed_list
+
+
 if __name__ == '__main__':
     list_ = LinkedList()
     list_.insert_start(4)
@@ -99,4 +145,5 @@ if __name__ == '__main__':
     list_.insert_start(1)
     print(list_)
 
-    print(return_kth_to_last(list_, 20))
+    print(return_kth(list_, 5))
+    print(reverse_linked_list(list_))
