@@ -143,7 +143,12 @@ if __name__ == '__main__':
     list_.insert_end(2)
     list_.insert_start(34)
     list_.insert_start(1)
-    print(list_)
+    l2 = list_
 
-    print(return_kth(list_, 5))
-    print(reverse_linked_list(list_))
+    print(list_)
+    print(l2)
+
+    l2.insert_start(20)
+
+    print(list_)
+    print(l2)

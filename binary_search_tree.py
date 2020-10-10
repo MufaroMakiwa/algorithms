@@ -6,9 +6,15 @@ class Tree:
         self.key = None
         self.count = 0
         self.parent = parent
-        self.left = None
-        self.right = None
-        self.median = None
+        self.left: Tree = None
+        self.right: Tree = None
+
+    def __str__(self):
+        nodes = []
+        for node in self:
+            nodes.append(node)
+
+        return str(nodes)
 
     def __contains__(self, item):
         if self.key < item:
@@ -35,6 +41,22 @@ class Tree:
 
         if self.right:
             yield from self.right.__iter__()
+
+    def get_height(self, so_far=0):
+        """
+        :return: Height of the binary search tree
+        """
+
+        if self.left and self.right:
+            return max(self.left.get_height(so_far + 1), self.right.get_height(so_far + 1))
+
+        if self.left:
+            return self.left.get_height(so_far + 1)
+
+        if self.right:
+            return self.right.get_height(so_far + 1)
+
+        return so_far
 
     def insert(self, node):
         """
@@ -74,6 +96,30 @@ class Tree:
             return self.right.find_max()
         return self.key
 
+    def is_balanced(self, left_h=0, right_h=0):
+        """
+        :return: True is the heights of the two subtrees of any node never differ by more than one
+        """
+        if abs(left_h - right_h) > 1:
+            return False
+
+        if self.left and self.right:
+            if not self.left.is_balanced(left_h + 1, right_h + 1):
+                return False
+
+            if not self.right.is_balanced(left_h + 1, right_h + 1):
+                return False
+
+            return True
+
+        if self.left:
+            return self.left.is_balanced(left_h + 1, right_h)
+
+        if self.right:
+            return self.right.is_balanced(left_h, right_h + 1)
+
+        return True
+
     def find_median(self):
         """
         :return: The median of the numbers in the BST
@@ -82,9 +128,6 @@ class Tree:
 
 if __name__ == '__main__':
 
-    tree = Tree()
+    pass
 
-    for i in range(10):
-        tree.insert(random.randint(1, 10))
 
-    print(list(tree))
