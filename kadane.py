@@ -4,7 +4,7 @@ import random
 def maximum_sum(arr):
     """
     :param arr: A list of negative and non-negative integers
-    :return: The contiguous sublist with the maximum sum
+    :return: The maximum sum of any contiguous subarray
     """
 
     max_so_far = -float("inf")

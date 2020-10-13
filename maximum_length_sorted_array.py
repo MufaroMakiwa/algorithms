@@ -15,7 +15,7 @@ def maximum_length_sorted_array(arr):
     # keep track of the subarray being formed
     length_so_far = 0
 
-    # keep track of the maximum legnth of sorted subarray
+    # keep track of the maximum length of sorted subarray
     max_len = -float("inf")
 
     # start index of max_length sorted subarray
